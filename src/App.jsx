@@ -114,7 +114,71 @@ export default function App() {
         </a>
       </nav>
 
-      {/* seção de disponibilidade e simulador abaixo... */}
+      {aba === "disponibilidade" && (
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col sm:flex-row gap-2 mb-4 bg-white p-4 rounded-xl shadow">
+            <input
+              type="text"
+              placeholder="Buscar por lote ou quadra..."
+              value={filtro}
+              onChange={(e) => setFiltro(e.target.value)}
+              className="flex-1 p-2 sm:p-3 border rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+            />
+            <select
+              className="w-full sm:w-1/4 p-2 sm:p-3 border rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="todos">Todos</option>
+              <option value="disponível">Disponíveis</option>
+              <option value="vendido">Vendidos</option>
+            </select>
+          </div>
+
+          <div className="grid gap-4 sm:hidden">
+            {lotesFiltrados.map((lote) => (
+              <div key={lote.id} className="bg-white rounded-xl shadow p-4">
+                <p className="text-xs text-gray-500 mb-1">ID: {lote.id}</p>
+                <p className="text-base font-semibold text-[#333] leading-snug">{lote.lote}</p>
+                <p className="text-sm">Área: {lote.area} m²</p>
+                <p className={`inline-block px-3 py-1 mt-2 text-xs rounded-full font-semibold 
+                  ${lote.status === 'Disponível' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}
+                >
+                  {lote.status}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="hidden sm:block overflow-x-auto">
+            <table className="w-full text-left border-separate border-spacing-y-2 text-sm">
+              <thead>
+                <tr>
+                  {['ID', 'Lote', 'Área (m²)', 'Status'].map((header) => (
+                    <th key={header} className="bg-[#E8F0EA] px-3 py-2 font-semibold text-gray-600">
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {lotesFiltrados.map((lote) => (
+                  <tr key={lote.id} className="bg-white hover:bg-gray-50 transition-colors">
+                    <td className="px-3 py-2 whitespace-nowrap">{lote.id}</td>
+                    <td className="px-3 py-2 font-medium whitespace-nowrap">{lote.lote}</td>
+                    <td className="px-3 py-2 whitespace-nowrap">{lote.area}</td>
+                    <td className={`px-3 py-2 rounded-full w-max font-semibold whitespace-nowrap 
+                      ${lote.status === 'Disponível' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}
+                    >
+                      {lote.status}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {aba === "simulador" && (
         <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow p-4 sm:p-6">
