@@ -114,7 +114,127 @@ export default function App() {
         </a>
       </nav>
 
-      {/* Conteúdo das abas permanece abaixo */}
+      {aba === "disponibilidade" && (
+        <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-6">
+          <div className="flex flex-col sm:flex-row gap-4 mb-6">
+            <input
+              type="text"
+              placeholder="Buscar por lote ou quadra..."
+              value={filtro}
+              onChange={(e) => setFiltro(e.target.value)}
+              className="flex-1 p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+            />
+            <select
+              className="w-full sm:w-1/4 p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="todos">Todos</option>
+              <option value="disponível">Disponíveis</option>
+              <option value="vendido">Vendidos</option>
+            </select>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-separate border-spacing-y-2">
+              <thead>
+                <tr>
+                  {['ID', 'Lote', 'Área (m²)', 'Status'].map((header) => (
+                    <th key={header} className="bg-[#E8F0EA] px-4 py-2 text-sm font-semibold text-gray-600">
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {lotesFiltrados.map((lote) => (
+                  <tr key={lote.id} className="bg-white hover:bg-gray-50 transition-colors">
+                    <td className="px-4 py-3">{lote.id}</td>
+                    <td className="px-4 py-3 font-medium">{lote.lote}</td>
+                    <td className="px-4 py-3">{lote.area}</td>
+                    <td className={`px-4 py-3 rounded-full w-max font-semibold 
+                      ${lote.status === 'Disponível' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}
+                    >
+                      {lote.status}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {aba === "simulador" && (
+        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6">
+          <div className="space-y-4">
+            <select
+              onChange={(e) => {
+                const id = parseInt(e.target.value);
+                setLoteSelecionado(lotes.find((l) => l.id === id) || null);
+              }}
+              className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+            >
+              <option value="">Selecione um lote disponível</option>
+              {lotes.filter((l) => l.status.toLowerCase() === 'disponível').map((l) => (
+                <option key={l.id} value={l.id}>
+                  {l.lote} ({l.area} m²)
+                </option>
+              ))}
+            </select>
+
+            {loteSelecionado && (
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <select
+                    className="flex-1 p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+                    value={formaPagamento}
+                    onChange={(e) => setFormaPagamento(e.target.value)}
+                  >
+                    <option value="avista">À vista</option>
+                    <option value="prazo">Parcelado</option>
+                  </select>
+                  {formaPagamento === 'prazo' && (
+                    <select
+                      className="flex-1 p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F] max-h-40 overflow-y-auto"
+                      value={prazo}
+                      onChange={(e) => setPrazo(parseInt(e.target.value))}
+                    >
+                      {Object.keys(jurosPorPrazo).map((p) => (
+                        <option key={p} value={p}>
+                          {p} meses
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+                <div className="bg-[#F1F5F2] p-6 rounded-xl border border-[#E0E4E2] space-y-2">
+                  {(() => {
+                    const { valorBase, valorFinal, desconto, juros, parcela } = calcularValores(loteSelecionado);
+                    return (
+                      <>
+                        <p><strong>Valor base:</strong> R$ {formatarValor(valorBase)}</p>
+                        {formaPagamento === 'avista' ? (
+                          <>
+                            <p><strong>Desconto:</strong> {desconto}%</p>
+                            <p><strong>Valor final:</strong> R$ {formatarValor(valorFinal)}</p>
+                          </>
+                        ) : (
+                          <>
+                            <p><strong>Juros:</strong> {juros}%</p>
+                            <p><strong>Valor total a prazo:</strong> R$ {formatarValor(valorFinal)}</p>
+                            <p><strong>Parcela mensal:</strong> R$ {formatarValor(parcela)}</p>
+                          </>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
