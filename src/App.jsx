@@ -80,7 +80,41 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F8F9F9] px-2 sm:px-8 py-4 text-sm sm:text-base">
-      {/* ... cabeçalho, contadores e navegação ... */}
+      <header className="max-w-4xl mx-auto text-center mb-4">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#556B2F] mb-1 leading-snug">
+          Incorporadora Central Park LTDA
+        </h1>
+        <p className="text-sm sm:text-lg text-gray-700 leading-tight">
+          Disponibilidade | Loteamento Jardim Buriti
+        </p>
+      </header>
+
+      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-gray-800 mb-4">
+        <span className="bg-white px-3 py-1 rounded-xl shadow">Disponíveis: <strong>{totalDisponiveis}</strong></span>
+        <span className="bg-white px-3 py-1 rounded-xl shadow">Vendidos: <strong>{totalVendidos}</strong></span>
+      </div>
+
+      <nav className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
+        {["disponibilidade", "simulador"].map((item) => (
+          <button
+            key={item}
+            onClick={() => setAba(item)}
+            className={`w-full sm:w-auto px-4 py-2 rounded-xl font-medium transition-colors duration-200 text-xs sm:text-sm 
+              ${aba === item ? "bg-[#556B2F] text-white shadow" : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"}`}
+          >
+            {item === "disponibilidade" ? "Disponibilidade" : "Simulador de Valores"}
+          </button>
+        ))}
+        <a
+          href="/MAPA%20LOTEAMENTO%20-%20BURITI.pdf"
+          download
+          className="w-full sm:w-auto px-4 py-2 rounded-xl font-medium transition-colors duration-200 bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 text-center text-xs sm:text-sm"
+        >
+          📄 Baixar Mapa
+        </a>
+      </nav>
+
+      {/* seção de disponibilidade e simulador abaixo... */}
 
       {aba === "simulador" && (
         <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow p-4 sm:p-6">
