@@ -94,15 +94,15 @@ export default function App() {
         <span className="bg-white px-3 py-1 rounded-xl shadow">Vendidos: <strong>{totalVendidos}</strong></span>
       </div>
 
-     <nav className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
-  {["disponibilidade", "simulador"].map((item) => (
-    <button
-      key={item}
-      onClick={() => setAba(item)}
-      className={`w-full sm:w-auto px-4 py-2 rounded-xl font-medium transition-colors duration-200 text-xs sm:text-sm 
-        ${aba === item ? "bg-[#556B2F] text-white shadow" : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"}`}
-    >
-      {item === "disponibilidade" ? "Disponibilidade" : "Simulador de Valores"}
+      <nav className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
+        {["disponibilidade", "simulador"].map((item) => (
+          <button
+            key={item}
+            onClick={() => setAba(item)}
+            className={`w-full sm:w-auto px-4 py-2 rounded-xl font-medium transition-colors duration-200 text-xs sm:text-sm 
+              ${aba === item ? "bg-[#556B2F] text-white shadow" : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"}`}
+          >
+            {item === "disponibilidade" ? "Disponibilidade" : "Simulador de Valores"}
           </button>
         ))}
         <a
@@ -141,9 +141,8 @@ export default function App() {
                 <p className="text-xs text-gray-500 mb-1">ID: {lote.id}</p>
                 <p className="text-base font-semibold text-[#333] leading-snug">{lote.lote}</p>
                 <p className="text-sm">Área: {lote.area} m²</p>
-                <p className={inline-block px-3 py-1 mt-2 text-xs rounded-full font-semibold 
-                  ${lote.status === 'Disponível' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}
-                >
+                <p className={`inline-block px-3 py-1 mt-2 text-xs rounded-full font-semibold 
+                  ${lote.status === 'Disponível' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                   {lote.status}
                 </p>
               </div>
@@ -167,9 +166,8 @@ export default function App() {
                     <td className="px-3 py-2 whitespace-nowrap">{lote.id}</td>
                     <td className="px-3 py-2 font-medium whitespace-nowrap">{lote.lote}</td>
                     <td className="px-3 py-2 whitespace-nowrap">{lote.area}</td>
-                    <td className={px-3 py-2 rounded-full w-max font-semibold whitespace-nowrap 
-                      ${lote.status === 'Disponível' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}
-                    >
+                    <td className={`px-3 py-2 rounded-full w-max font-semibold whitespace-nowrap 
+                      ${lote.status === 'Disponível' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                       {lote.status}
                     </td>
                   </tr>
