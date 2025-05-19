@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+
 
 const jurosPorPrazo = {
   12: 0,
