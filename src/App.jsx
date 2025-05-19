@@ -15,7 +15,8 @@ const jurosPorPrazo = {
 
 export default function App() {
   const [lotes, setLotes] = useState([]);
-  const [filtro, setFiltro] = useState("");
+  const [filtroDisponibilidade, setFiltroDisponibilidade] = useState("");
+  const [filtroSimulador, setFiltroSimulador] = useState("");
   const [status, setStatus] = useState("todos");
   const [aba, setAba] = useState("disponibilidade");
   const [loteSelecionado, setLoteSelecionado] = useState(null);
@@ -33,7 +34,7 @@ export default function App() {
   }, []);
 
   const lotesFiltrados = lotes.filter((lote) => {
-    const busca = filtro.toLowerCase();
+    const busca = filtroDisponibilidade.toLowerCase();
     const nome = lote.lote.toLowerCase();
     const statusMatch = status === "todos" || lote.status.toLowerCase() === status;
     return nome.includes(busca) && statusMatch;
@@ -120,8 +121,8 @@ export default function App() {
             <input
               type="text"
               placeholder="Buscar por lote ou quadra..."
-              value={filtro}
-              onChange={(e) => setFiltro(e.target.value)}
+              value={filtroDisponibilidade}
+              onChange={(e) => setFiltroDisponibilidade(e.target.value)}
               className="flex-1 p-2 sm:p-3 border rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
             />
             <select
@@ -186,26 +187,26 @@ export default function App() {
                 type="text"
                 placeholder="Digite o lote (ex: QUADRA 12 LOTE 04)"
                 className="w-full p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
-                value={filtro}
+                value={filtroSimulador}
                 onChange={(e) => {
-                  setFiltro(e.target.value);
+                  setFiltroSimulador(e.target.value);
                   setLoteSelecionado(null);
                 }}
               />
-              {filtro && (
+              {filtroSimulador && (
                 <ul className="bg-white border rounded-xl mt-2 max-h-40 overflow-y-auto text-sm shadow">
                   {lotes
                     .filter(
                       (l) =>
                         l.status.toLowerCase() === "disponível" &&
-                        l.lote.toLowerCase().includes(filtro.toLowerCase())
+                        l.lote.toLowerCase().includes(filtroSimulador.toLowerCase())
                     )
                     .map((l) => (
                       <li
                         key={l.id}
                         onClick={() => {
                           setLoteSelecionado(l);
-                          setFiltro(l.lote);
+                          setFiltroSimulador(l.lote);
                         }}
                         className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       >
