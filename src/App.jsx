@@ -80,15 +80,30 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9F9] px-2 sm:px-8 py-4 text-sm sm:text-base">
-      <header className="max-w-4xl mx-auto text-center mb-4">
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#556B2F] mb-1 leading-snug">
-          Incorporadora Central Park LTDA
-        </h1>
-        <p className="text-sm sm:text-lg text-gray-700 leading-tight">
-          Disponibilidade | Loteamento Jardim Buriti
-        </p>
-      </header>
+    <div className="relative">
+      {/* Imagem de fundo translúcida */}
+      <div
+        className="fixed inset-0 bg-center bg-no-repeat bg-contain pointer-events-none"
+        style={{
+          backgroundImage: "url('/logo-buriti.webp')",
+          opacity: 0.05,
+          zIndex: 0,
+        }}
+      ></div>
+
+      {/* Conteúdo principal com z-index superior */}
+      <div className="relative z-10 min-h-screen bg-[#F8F9F9] px-2 sm:px-8 py-4 text-sm sm:text-base">
+        <header className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 text-center mb-4">
+          <img src="/logo-buriti.webp" alt="Logo Buriti" className="w-20 h-auto" />
+          <div>
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-[#556B2F] mb-1 leading-snug">
+              Incorporadora Central Park LTDA
+            </h1>
+            <p className="text-sm sm:text-lg text-gray-700 leading-tight">
+              Disponibilidade | Loteamento Jardim Buriti
+            </p>
+          </div>
+        </header>
 
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-gray-800 mb-4">
         <span className="bg-white px-3 py-1 rounded-xl shadow">Disponíveis: <strong>{totalDisponiveis}</strong></span>
