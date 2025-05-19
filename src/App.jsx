@@ -94,15 +94,15 @@ export default function App() {
         <span className="bg-white px-3 py-1 rounded-xl shadow">Vendidos: <strong>{totalVendidos}</strong></span>
       </div>
 
-      <nav className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
-        {["disponibilidade", "simulador"].map((item) => (
-          <button
-            key={item}
-            onClick={() => setAba(item)}
-            className={w-full sm:w-auto px-4 py-2 rounded-xl font-medium transition-colors duration-200 text-xs sm:text-sm 
-              ${aba === item ? "bg-[#556B2F] text-white shadow" : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"}}
-          >
-            {item === "disponibilidade" ? "Disponibilidade" : "Simulador de Valores"}
+     <nav className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
+  {["disponibilidade", "simulador"].map((item) => (
+    <button
+      key={item}
+      onClick={() => setAba(item)}
+      className={`w-full sm:w-auto px-4 py-2 rounded-xl font-medium transition-colors duration-200 text-xs sm:text-sm 
+        ${aba === item ? "bg-[#556B2F] text-white shadow" : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"}`}
+    >
+      {item === "disponibilidade" ? "Disponibilidade" : "Simulador de Valores"}
           </button>
         ))}
         <a
