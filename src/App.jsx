@@ -178,97 +178,97 @@ export default function App() {
         </div>
       )}
 
-     {aba === "simulador" && (
-  <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow p-4 sm:p-6">
-    <div className="space-y-4">
-      <div>
-        <input
-          type="text"
-          placeholder="Digite o lote (ex: QUADRA 12 LOTE 04)"
-          className="w-full p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
-          value={filtro}
-          onChange={(e) => {
-            setFiltro(e.target.value);
-            setLoteSelecionado(null);
-          }}
-        />
-        {filtro && (
-          <ul className="bg-white border rounded-xl mt-2 max-h-40 overflow-y-auto text-sm shadow">
-            {lotes
-              .filter(
-                (l) =>
-                  l.status.toLowerCase() === "disponível" &&
-                  l.lote.toLowerCase().includes(filtro.toLowerCase())
-              )
-              .map((l) => (
-                <li
-                  key={l.id}
-                  onClick={() => {
-                    setLoteSelecionado(l);
-                    setFiltro(l.lote);
-                  }}
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                >
-                  {l.lote} ({l.area} m²)
-                </li>
-              ))}
-          </ul>
-        )}
-      </div>
+      {aba === "simulador" && (
+        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow p-4 sm:p-6">
+          <div className="space-y-4">
+            <div>
+              <input
+                type="text"
+                placeholder="Digite o lote (ex: QUADRA 12 LOTE 04)"
+                className="w-full p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+                value={filtro}
+                onChange={(e) => {
+                  setFiltro(e.target.value);
+                  setLoteSelecionado(null);
+                }}
+              />
+              {filtro && (
+                <ul className="bg-white border rounded-xl mt-2 max-h-40 overflow-y-auto text-sm shadow">
+                  {lotes
+                    .filter(
+                      (l) =>
+                        l.status.toLowerCase() === "disponível" &&
+                        l.lote.toLowerCase().includes(filtro.toLowerCase())
+                    )
+                    .map((l) => (
+                      <li
+                        key={l.id}
+                        onClick={() => {
+                          setLoteSelecionado(l);
+                          setFiltro(l.lote);
+                        }}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      >
+                        {l.lote} ({l.area} m²)
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </div>
 
-      {loteSelecionado && (
-        <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <select
-              className="flex-1 p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
-              value={formaPagamento}
-              onChange={(e) => setFormaPagamento(e.target.value)}
-            >
-              <option value="avista">À vista</option>
-              <option value="prazo">Parcelado</option>
-            </select>
-            {formaPagamento === "prazo" && (
-              <select
-                className="flex-1 p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F] max-h-40 overflow-y-auto"
-                value={prazo}
-                onChange={(e) => setPrazo(parseInt(e.target.value))}
-              >
-                {Object.keys(jurosPorPrazo).map((p) => (
-                  <option key={p} value={p}>
-                    {p} meses
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
-
-          <div className="bg-[#F1F5F2] p-4 sm:p-6 rounded-xl border border-[#E0E4E2] space-y-2">
-            {(() => {
-              const { valorBase, valorFinal, desconto, juros, parcela } = calcularValores(loteSelecionado);
-              return (
-                <>
-                  <p><strong>Valor base:</strong> R$ {formatarValor(valorBase)}</p>
-                  {formaPagamento === 'avista' ? (
-                    <>
-                      <p><strong>Desconto:</strong> {desconto}%</p>
-                      <p><strong>Valor final:</strong> R$ {formatarValor(valorFinal)}</p>
-                    </>
-                  ) : (
-                    <>
-                      <p><strong>Juros:</strong> {juros}%</p>
-                      <p><strong>Valor total a prazo:</strong> R$ {formatarValor(valorFinal)}</p>
-                      <p><strong>Parcela mensal:</strong> R$ {formatarValor(parcela)}</p>
-                    </>
+            {loteSelecionado && (
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <select
+                    className="flex-1 p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+                    value={formaPagamento}
+                    onChange={(e) => setFormaPagamento(e.target.value)}
+                  >
+                    <option value="avista">À vista</option>
+                    <option value="prazo">Parcelado</option>
+                  </select>
+                  {formaPagamento === "prazo" && (
+                    <select
+                      className="flex-1 p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F] max-h-40 overflow-y-auto"
+                      value={prazo}
+                      onChange={(e) => setPrazo(parseInt(e.target.value))}
+                    >
+                      {Object.keys(jurosPorPrazo).map((p) => (
+                        <option key={p} value={p}>
+                          {p} meses
+                        </option>
+                      ))}
+                    </select>
                   )}
-                </>
-              );
-            })()}
+                </div>
+
+                <div className="bg-[#F1F5F2] p-4 sm:p-6 rounded-xl border border-[#E0E4E2] space-y-2">
+                  {(() => {
+                    const { valorBase, valorFinal, desconto, juros, parcela } = calcularValores(loteSelecionado);
+                    return (
+                      <>
+                        <p><strong>Valor base:</strong> R$ {formatarValor(valorBase)}</p>
+                        {formaPagamento === 'avista' ? (
+                          <>
+                            <p><strong>Desconto:</strong> {desconto}%</p>
+                            <p><strong>Valor final:</strong> R$ {formatarValor(valorFinal)}</p>
+                          </>
+                        ) : (
+                          <>
+                            <p><strong>Juros:</strong> {juros}%</p>
+                            <p><strong>Valor total a prazo:</strong> R$ {formatarValor(valorFinal)}</p>
+                            <p><strong>Parcela mensal:</strong> R$ {formatarValor(parcela)}</p>
+                          </>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
     </div>
-  </div>
-)}
-
   );
 }
