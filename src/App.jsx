@@ -57,10 +57,7 @@ export default function App() {
     if (quadra === 31 && numLote >= 8 && numLote <= 21) return true;
     if (quadra === 64 && numLote >= 17 && numLote <= 24) return true;
     if ([65, 66].includes(quadra) && numLote >= 27 && numLote <= 45) return true;
-    if (![
-      1, 2, 3, 4, 33, 34, 35, 27, 28, 31, 58, 59, 64, 65, 66,
-    ].includes(quadra) && numLote <= 7)
-      return true;
+    if (![1, 2, 3, 4, 33, 34, 35, 27, 28, 31, 58, 59, 64, 65, 66].includes(quadra) && numLote <= 7) return true;
     return false;
   }
 
@@ -87,6 +84,7 @@ export default function App() {
 
   return (
     <div className="relative">
+      {/* Imagem de fundo translúcida */}
       <div
         className="fixed inset-0 bg-center bg-no-repeat bg-contain pointer-events-none"
         style={{
@@ -96,6 +94,7 @@ export default function App() {
         }}
       ></div>
 
+      {/* Conteúdo principal */}
       <div className="relative z-10 min-h-screen bg-[#F8F9F9] px-2 sm:px-8 py-4 text-sm sm:text-base">
         <header className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 text-center mb-4">
           <img src="/logo-buriti.webp" alt="Logo Buriti" className="w-20 h-auto" />
@@ -160,25 +159,23 @@ export default function App() {
                 <thead>
                   <tr>
                     {["ID", "Lote", "Área (m²)", "Status"].map((header) => (
-                      <th
-                        key={header}
-                        className="bg-[#E8F0EA] px-3 py-2 font-semibold text-gray-600"
-                      >
+                      <th key={header} className="bg-[#E8F0EA] px-3 py-2 font-semibold text-gray-600">
                         {header}
                       </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {lotesFiltrados.map((lote) => (
-                    <tr
-                      key={lote.id}
-                      className="bg-white hover:bg-gray-50 transition-colors"
-                    >
+                    {lotesFiltrados.map((lote) => (
+                    <tr key={lote.id} className="bg-white hover:bg-gray-50 transition-colors">
                       <td className="px-3 py-2 whitespace-nowrap">{lote.id}</td>
                       <td className="px-3 py-2 font-medium whitespace-nowrap">{lote.lote}</td>
                       <td className="px-3 py-2 whitespace-nowrap">{lote.area}</td>
-                      <td className={`px-3 py-2 rounded-full w-max font-semibold whitespace-nowrap ${lote.status.toLowerCase() === "disponível" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+                      <td className={`px-3 py-2 rounded-full w-max font-semibold whitespace-nowrap ${
+                        lote.status.toLowerCase() === "disponível"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}>
                         {lote.status}
                       </td>
                     </tr>
@@ -255,11 +252,14 @@ export default function App() {
 
                   <div className="bg-[#F1F5F2] p-4 sm:p-6 rounded-xl border border-[#E0E4E2] space-y-2">
                     {(() => {
-                      const { valorBase, valorFinal, desconto, juros, parcela } = calcularValores(loteSelecionado);
+                      const { valorBase, valorFinal, desconto, juros, parcela } =
+                        calcularValores(loteSelecionado);
                       return (
                         <>
-                          <p><strong>Valor base:</strong> R$ {formatarValor(valorBase)}</p>
-                          {formaPagamento === 'avista' ? (
+                          <p>
+                            <strong>Valor base:</strong> R$ {formatarValor(valorBase)}
+                          </p>
+                          {formaPagamento === "avista" ? (
                             <>
                               <p><strong>Desconto:</strong> {desconto}%</p>
                               <p><strong>Valor final:</strong> R$ {formatarValor(valorFinal)}</p>
@@ -284,3 +284,4 @@ export default function App() {
     </div>
   );
 }
+
