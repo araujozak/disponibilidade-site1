@@ -96,7 +96,7 @@ export default function App() {
 
       {/* Conteúdo principal */}
       <div className="relative z-10 min-h-screen bg-[#F8F9F9] px-2 sm:px-8 py-4 text-sm sm:text-base">
-        <header className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 text-center mb-4">
+        <header className="max-w-4xl mx-auto flex flex-row items-center justify-center gap-4 text-center mb-4">
           <img src="/logo-buriti.webp" alt="Logo Buriti" className="w-20 h-auto" />
           <div>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-[#556B2F] mb-1 leading-snug">
