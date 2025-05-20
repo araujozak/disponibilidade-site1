@@ -96,7 +96,7 @@ export default function App() {
 
       {/* Conteúdo principal */}
       <div className="relative z-10 min-h-screen bg-[#F8F9F9] px-2 sm:px-8 py-4 text-sm sm:text-base">
-        <header className="max-w-4xl mx-auto flex flex-row items-center justify-center gap-4 text-center mb-4">
+        <header className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 text-center mb-4">
           <img src="/logo-buriti.webp" alt="Logo Buriti" className="w-20 h-auto" />
           <div>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-[#556B2F] mb-1 leading-snug">
@@ -183,6 +183,24 @@ export default function App() {
                 </tbody>
               </table>
             </div>
+
+            <div className="grid sm:hidden gap-4">
+  {lotesFiltrados.map((lote) => (
+    <div key={lote.id} className="bg-white rounded-xl shadow p-4">
+      <p className="text-xs text-gray-500 mb-1">ID: {lote.id}</p>
+      <p className="text-base font-semibold text-[#333] leading-snug">{lote.lote}</p>
+      <p className="text-sm">Área: {lote.area} m²</p>
+      <p className={`inline-block px-3 py-1 mt-2 text-xs rounded-full font-semibold ${
+        lote.status.toLowerCase() === 'disponível'
+          ? 'bg-green-100 text-green-800'
+          : 'bg-red-100 text-red-800'
+      }`}>
+        {lote.status}
+      </p>
+    </div>
+  ))}
+</div>
+
           </div>
         )}
 
@@ -284,4 +302,3 @@ export default function App() {
     </div>
   );
 }
-
