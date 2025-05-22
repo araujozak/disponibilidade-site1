@@ -69,16 +69,23 @@ export default function App() {
   }
 
   function calcularValores(lote) {
-    const valorM2 = estaNaAvenida(lote) ? 205 : 190;
-    const valorBase = lote.area * valorM2;
-    if (formaPagamento === "avista") {
-      const valorFinal = Math.round(valorBase * 0.95 * 100) / 100;
-      return { valorBase, valorFinal, desconto: 5 };
-    } else {
-      const juros = jurosPorPrazo[prazo] || 0;
-      const valorFinal = Math.round(valorBase * (1 + juros / 100) * 100) / 100;
-      const parcela = Math.round((valorFinal / prazo) * 100) / 100;
-      return { valorBase, valorFinal, juros, parcela };
+  const valorM2 = estaNaAvenida(lote) ? 205 : 190;
+  const valorBase = lote.area * valorM2;
+
+  if (formaPagamento === "avista") {
+    const valorFinal = Math.round(valorBase * 0.95 * 100) / 100;
+    return { valorBase, valorFinal, desconto: 5 };
+  } else {
+    const jurosTotal = jurosPorPrazo[prazo] || 0;
+    const jurosMensal = Math.round((jurosTotal / prazo) * 1000) / 1000; // 3 casas para evitar arredondamento prematuro
+    const valorFinal = Math.round(valorBase * (1 + jurosTotal / 100) * 100) / 100;
+    const parcela = Math.round((valorFinal / prazo) * 100) / 100;
+    return {
+      valorBase,
+      valorFinal,
+      parcela,
+      jurosMensal // retorna apenas o juros mensal
+    };
     }
   }
 
@@ -268,7 +275,7 @@ export default function App() {
 
                   <div className="bg-[#F1F5F2] p-4 sm:p-6 rounded-xl border border-[#E0E4E2] space-y-2">
                     {(() => {
-                      const { valorBase, valorFinal, desconto, juros, parcela } =
+                      const { valorBase, valorFinal, desconto, jurosMensal, parcela } =
                         calcularValores(loteSelecionado);
                       return (
                         <>
@@ -282,7 +289,7 @@ export default function App() {
                             </>
                           ) : (
                             <>
-                              <p><strong>Juros:</strong> {juros}%</p>
+                              <p><strong>Juros por mês:</strong> {jurosMensal}%</p>
                               <p><strong>Valor total a prazo:</strong> R$ {formatarValor(valorFinal)}</p>
                               <p><strong>Parcela mensal:</strong> R$ {formatarValor(parcela)}</p>
                             </>
