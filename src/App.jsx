@@ -17,7 +17,7 @@ export default function App() {
   const [lotes, setLotes] = useState([]);
   const [filtroDisponibilidade, setFiltroDisponibilidade] = useState("");
   const [filtroSimulador, setFiltroSimulador] = useState("");
-  const [status, setStatus] = useState("todos");
+  const [status, setStatus] = useState("disponível");
   const [aba, setAba] = useState("disponibilidade");
   const [loteSelecionado, setLoteSelecionado] = useState(null);
   const [formaPagamento, setFormaPagamento] = useState("avista");
