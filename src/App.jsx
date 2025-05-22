@@ -153,8 +153,8 @@ export default function App() {
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
               >
-                <option value="todos">Todos</option>
                 <option value="disponível">Disponíveis</option>
+                <option value="todos">Todos</option>
                 <option value="vendido">Vendidos</option>
               </select>
             </div>
