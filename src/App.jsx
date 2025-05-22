@@ -106,6 +106,8 @@ export default function App() {
               Disponibilidade de Lotes
             </p>
           </div>
+     
+        
         </header>
 
 
