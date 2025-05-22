@@ -103,7 +103,7 @@ export default function App() {
               Loteamento Jardim Buriti
             </h1>
             <p className="text-sm sm:text-lg text-gray-700 leading-tight">
-              Disponibilidade | Loteamento Jardim Buriti
+              Disponibilidade de Lotes
             </p>
           </div>
         </header>
