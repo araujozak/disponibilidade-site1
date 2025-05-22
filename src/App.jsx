@@ -99,7 +99,7 @@ export default function App() {
         <header className="max-w-4xl mx-auto flex flex-row items-center justify-center gap-4 text-center mb-4">
           <img src="/logo-buriti.webp" alt="Logo Buriti" className="w-20 h-auto" />
           <div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-[#556B2F] mb-1 leading-snug">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-[#5d2b2a] mb-1 leading-snug">
               Loteamento Jardim Buriti
             </h1>
             <p className="text-sm sm:text-lg text-gray-700 leading-tight">
@@ -117,7 +117,7 @@ export default function App() {
               key={item}
               onClick={() => setAba(item)}
               className={`w-full sm:w-auto px-4 py-2 rounded-xl font-medium transition-colors duration-200 text-xs sm:text-sm 
-                ${aba === item ? "bg-[#556B2F] text-white shadow" : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"}`}
+                ${aba === item ? "bg-[#5d2b2a] text-white shadow" : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"}`}
             >
               {item === "disponibilidade" ? "Disponibilidade" : "Simulador de Valores"}
             </button>
@@ -139,10 +139,10 @@ export default function App() {
                 placeholder="Buscar por lote ou quadra..."
                 value={filtroDisponibilidade}
                 onChange={(e) => setFiltroDisponibilidade(e.target.value)}
-                className="flex-1 p-2 sm:p-3 border rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+                className="flex-1 p-2 sm:p-3 border rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#5d2b2a]"
               />
               <select
-                className="w-full sm:w-1/4 p-2 sm:p-3 border rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+                className="w-full sm:w-1/4 p-2 sm:p-3 border rounded-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#5d2b2a]"
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
               >
@@ -209,7 +209,7 @@ export default function App() {
                 <input
                   type="text"
                   placeholder="Digite o lote (ex: QUADRA 12 LOTE 04)"
-                  className="w-full p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+                  className="w-full p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5d2b2a]"
                   value={filtroSimulador}
                   onChange={(e) => {
                     setFiltroSimulador(e.target.value);
@@ -244,7 +244,7 @@ export default function App() {
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row gap-4">
                     <select
-                      className="flex-1 p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F]"
+                      className="flex-1 p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5d2b2a]"
                       value={formaPagamento}
                       onChange={(e) => setFormaPagamento(e.target.value)}
                     >
@@ -253,7 +253,7 @@ export default function App() {
                     </select>
                     {formaPagamento === "prazo" && (
                       <select
-                        className="flex-1 p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#556B2F] max-h-40 overflow-y-auto"
+                        className="flex-1 p-2 sm:p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5d2b2a] max-h-40 overflow-y-auto"
                         value={prazo}
                         onChange={(e) => setPrazo(parseInt(e.target.value))}
                       >
