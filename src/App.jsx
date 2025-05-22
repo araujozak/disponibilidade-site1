@@ -100,7 +100,7 @@ export default function App() {
           <img src="/logo-buriti.webp" alt="Logo Buriti" className="w-20 h-auto" />
           <div>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-[#556B2F] mb-1 leading-snug">
-              Incorporadora Central Park LTDA
+              Loteamento Jardim Buriti
             </h1>
             <p className="text-sm sm:text-lg text-gray-700 leading-tight">
               Disponibilidade | Loteamento Jardim Buriti
