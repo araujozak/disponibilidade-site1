@@ -108,11 +108,6 @@ export default function App() {
           </div>
         </header>
 
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-gray-800 mb-4">
-          <span className="bg-white px-3 py-1 rounded-xl shadow">Disponíveis: <strong>{totalDisponiveis}</strong></span>
-          <span className="bg-white px-3 py-1 rounded-xl shadow">Vendidos: <strong>{totalVendidos}</strong></span>
-        </div>
-
         <nav className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
           {["disponibilidade", "simulador"].map((item) => (
             <button
